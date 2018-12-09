@@ -1,0 +1,30 @@
+h1 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+.words span {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.words {
+    margin: 130px 0;
+}
+
+.company {
+    color: #1f8ce6;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.company:visited {
+    color: #1f8ce6;
+}
+
+.byline a{
+    font-size: 24px;
+}
