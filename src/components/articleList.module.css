@@ -20,10 +20,9 @@
 
 .articleListWrapper {
   padding: 0;
-  border-bottom: 1px solid #292929;
 }
 
-.articleListWrapper li:last-of-type {
+.articleListWrapper li:first-of-type {
   border-top: 1px solid #292929;
 }
 
@@ -35,4 +34,5 @@
   line-height: 31px;
   height: 50px;
   overflow:hidden;
+  border-bottom: 1px solid #292929;
 }
