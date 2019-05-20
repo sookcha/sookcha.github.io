@@ -1,14 +1,13 @@
 h1 {
-    font-size: 40px;
+    font-size: 34px;
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 20px;
 }
 
-.words span {
-    font-weight: bold;
-    font-size: 24px;
+.words p {
+    font-size: 20px;
 }
 
 .words {
@@ -26,5 +25,5 @@ h3 {
 }
 
 .byline a{
-    font-size: 24px;
+    font-size: 20px;
 }

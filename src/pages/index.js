@@ -1,12 +1,12 @@
 import React from 'react'
 
 import Layout from '../components/layout'
-import Intro from '../components/intro'
+import ArticleList from '../components/articleList'
 
-const IndexPage = () => (
+const ArticlesPage = () => (
   <Layout>
-    <Intro></Intro>
+    <ArticleList></ArticleList>
   </Layout>
 )
 
-export default IndexPage
+export default ArticlesPage
