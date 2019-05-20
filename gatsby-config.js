@@ -1,6 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: 'contra',
+    description: 'Personal blog by Hoseong Son',
+    siteUrl: 'https://sookcha.com',
   },
   plugins: [
     // this (optional) plugin enables Progressive Web App + Offline functionality
@@ -15,5 +17,6 @@ module.exports = {
       },  
     },
     'gatsby-transformer-remark',
+    `gatsby-plugin-feed`
   ],
 }
