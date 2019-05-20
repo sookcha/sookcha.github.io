@@ -1,4 +1,19 @@
-.articleListWrapper {
-
+.blogTitle {
+  font-size: 24px;
 }
 
+.articleListWrapper {
+  padding: 0;
+  border-bottom: 1px solid black;
+}
+
+.articleListWrapper li:last-of-type {
+  border-top: 1px solid black;
+}
+
+.articleListWrapper li {
+  list-style-type: none;
+  padding: 0;
+  font-size: 20px;
+  padding: 10px 0;
+}

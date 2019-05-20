@@ -1,12 +1,50 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
+import ArticleLayout from '../components/articleLayout'
 import Layout from '../components/layout'
-import ArticleList from '../components/articleList'
+import PostLink from '../components/postLink'
+import articleListStyles from "../components/articleList.module.css"
 
-const ArticlesPage = () => (
+const ArticlesPage = ({
+  data: {
+    allMarkdownRemark: { edges },
+  },
+}) => {
+  const posts = edges
+  .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
+  .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
+
+
+  return (
   <Layout>
-    <ArticleList></ArticleList>
+    <ArticleLayout>
+      <Link to='/me'>about</Link>
+
+      <ul className={articleListStyles.articleListWrapper}>
+        {posts}
+      </ul>
+    </ArticleLayout>
   </Layout>
-)
+  )
+}
+
+export const pageQuery = graphql`
+  query {
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+      edges {
+        node {
+          id
+          excerpt(pruneLength: 250)
+          frontmatter {
+            date(formatString: "YYYY-MM-DD")
+            path
+            title
+          }
+        }
+      }
+    }
+  }
+`
 
 export default ArticlesPage

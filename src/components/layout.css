@@ -208,9 +208,10 @@ h1,h2,h3,h4,h5,h6,span,p {
 }
 
 a {
-  color: #0540F2;
+  color: inherit;
+  text-decoration: none;
 }
 
 a:visited {
-  color: #030A8C;
+  text-decoration: none;
 }
