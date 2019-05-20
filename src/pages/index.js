@@ -19,7 +19,9 @@ const ArticlesPage = ({
   return (
   <Layout>
     <ArticleLayout>
-      <Link to='/me'>about</Link>
+      <p className={articleListStyles.aboutLink}>
+        <Link to='/me'>about</Link>
+      </p>
 
       <ul className={articleListStyles.articleListWrapper}>
         {posts}

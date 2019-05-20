@@ -8,6 +8,7 @@ const PostLink = ({ post }) => (
     <Link to={post.frontmatter.path}>
       {post.frontmatter.title}
     </Link>
+    
     <span className={postLinkStyles.date}>{post.frontmatter.date}</span>
   </li>
 )

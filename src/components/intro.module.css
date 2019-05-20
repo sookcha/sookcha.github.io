@@ -1,9 +1,11 @@
 h1 {
     font-size: 34px;
+    font-weight: 500;
 }
 
 h3 {
     font-size: 20px;
+    font-weight: normal;
 }
 
 .words p {
@@ -26,4 +28,5 @@ h3 {
 
 .byline a {
     font-size: 20px;
+    text-decoration: underline;
 }

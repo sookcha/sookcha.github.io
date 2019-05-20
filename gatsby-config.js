@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Hoseong Son',
+    title: 'contra',
   },
   plugins: [
     // this (optional) plugin enables Progressive Web App + Offline functionality

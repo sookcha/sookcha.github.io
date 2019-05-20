@@ -1,14 +1,30 @@
 .blogTitle {
+  font-size: 36px;
+  margin: 15px 0 0 0;
+  font-weight: 500;
+}
+
+.smallTitle {
   font-size: 24px;
+  margin: 15px 0 0 0;
+  font-weight: normal;
+}
+
+.smallTitle:hover {
+  text-decoration: underline;
+}
+
+.aboutLink {
+  margin: 15px 0 18px 0;
 }
 
 .articleListWrapper {
   padding: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #292929;
 }
 
 .articleListWrapper li:last-of-type {
-  border-top: 1px solid black;
+  border-top: 1px solid #292929;
 }
 
 .articleListWrapper li {
@@ -16,4 +32,5 @@
   padding: 0;
   font-size: 20px;
   padding: 10px 0;
+  line-height: 31px;
 }

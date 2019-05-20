@@ -1,12 +1,13 @@
 import React from "react"
 import { Link } from 'gatsby'
+import GatsbyConfig from '../../gatsby-config'
 
 import articleListStyles from "./articleList.module.css"
 
-const ArticleLayout = ({children}) => (
+const ArticleLayout = ({smallTitle, children}) => (
   <div>
-    <p className={articleListStyles.blogTitle}>
-      <Link to='/'>horchata</Link>
+    <p className={smallTitle ? articleListStyles.smallTitle : articleListStyles.blogTitle}>
+      <Link to='/'>{GatsbyConfig.siteMetadata.title}</Link>
     </p>
     {children}
   </div>

@@ -1,7 +1,9 @@
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
 
 html {
-  font-family: sans-serif;
+  font-family: "IBM Plex Sans", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Dotum", sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -185,7 +187,6 @@ textarea {
   font: inherit;
 }
 html {
-  font: 112.5%/1.45em georgia, serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -199,16 +200,15 @@ html {
   box-sizing: inherit;
 }
 h1,h2,h3,h4,h5,h6,span,p {
-  font-family: 'Spoqa Han Sans', sans-serif;
   color: #1f2021;
-}
-
-.intro h1, .intro h3 {
-  font-weight: normal;
 }
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
   text-decoration: none;
 }
 
