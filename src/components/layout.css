@@ -215,3 +215,8 @@ a:hover {
 a:visited {
   text-decoration: none;
 }
+
+::selection {
+  background-color: #4C5157;
+  color: #FFF;
+}

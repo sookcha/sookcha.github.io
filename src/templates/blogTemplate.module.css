@@ -4,6 +4,16 @@
   color: black;
 }
 
+.blogPostContent a {
+  color: #2D88EE;
+  text-decoration: underline;
+}
+
+.blogPostContent a:hover {
+  color: rgb(30, 91, 161);
+  text-decoration: underline;
+}
+
 .title {
   font-weight: 500;
   font-size: 21px;
