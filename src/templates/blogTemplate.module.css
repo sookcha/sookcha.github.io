@@ -5,11 +5,12 @@
 }
 
 .title {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 21px;
 }
 
 .date {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 15px;
+  font-weight: normal;
 }
