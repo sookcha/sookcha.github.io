@@ -10,6 +10,11 @@ export default function Template({
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html } = markdownRemark
+  let disqusConfig = {
+    url: `${config.siteUrl+location.pathname}`,
+    identifier: post.id,
+    title: post.title,
+  }
   return (
     <Layout>
       <ArticleLayout smallTitle>
@@ -20,6 +25,7 @@ export default function Template({
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </ArticleLayout>
+      <Disqus config={disqusConfig} />
     </Layout>
   )
 }

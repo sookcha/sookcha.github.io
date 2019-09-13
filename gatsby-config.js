@@ -16,6 +16,12 @@ module.exports = {
         name: "markdown-pages",
       },  
     },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `contra-1`
+      }
+    },
     'gatsby-transformer-remark',
     `gatsby-plugin-feed`
   ],
