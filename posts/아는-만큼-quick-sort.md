@@ -1,5 +1,5 @@
 ---
-path: /quick-sort
+path: /posts/quick-sort
 date: 2020-08-22T09:56:16.416Z
 title: 아는 만큼 Quick Sort
 ---
