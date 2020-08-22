@@ -1,5 +1,5 @@
 ---
-path: /merge-sort
+path: /posts/merge-sort
 date: 2020-08-22T09:57:19.182Z
 title: 아는 만큼 Merge Sort
 ---
