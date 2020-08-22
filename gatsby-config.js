@@ -17,6 +17,12 @@ module.exports = {
       },  
     },
     'gatsby-transformer-remark',
-    `gatsby-plugin-feed`
+    `gatsby-plugin-feed`,
+    {
+        resolve: `gatsby-plugin-disqus`,
+        options: {
+        shortname: `sookcha`
+        },
+    }
   ],
 }
