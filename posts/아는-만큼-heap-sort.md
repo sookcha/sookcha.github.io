@@ -1,5 +1,5 @@
 ---
-path: /heap-sort
+path: /posts/heap-sort
 date: 2020-08-22T09:55:14.660Z
 title: 아는 만큼 Heap Sort
 ---
