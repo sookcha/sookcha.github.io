@@ -16,7 +16,7 @@ export default function Template({
   const { frontmatter, html } = markdownRemark
   const url = location.pathname ? location.pathname : ''; 
   let disqusConfig = {
-    url: `https://sookcha.com${url}`,
+    url: `${GatsbyConfig.siteMetadata.siteUrl + url}`,
     title: frontmatter.title,
   }
 
