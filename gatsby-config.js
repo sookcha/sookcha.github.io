@@ -21,7 +21,7 @@ module.exports = {
     {
         resolve: `gatsby-plugin-disqus`,
         options: {
-        shortname: `sookcha`
+          shortname: `sookcha`
         },
     }
   ],
