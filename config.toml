@@ -1,0 +1,36 @@
+base_url = "https://sookcha.github.io"
+title = "sookcha's blog"
+description = "A minimal blog"
+theme = "zap"
+compile_sass = false
+minify_html = false
+build_search_index = true
+default_language = "en"
+
+generate_feeds = true
+feed_filenames = ["atom.xml", "rss.xml"]
+
+taxonomies = [{ name = "tags", feed = true }]
+
+[search]
+index_format = "fuse_javascript"
+
+[markdown]
+highlight_code = true
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+[extra]
+keywords = "blog, minimal, zola"
+
+inline_icons = true
+icon_path = "static/icons/"
+icons = ["home", "chat", "search", "light", "asleep", "rss"]
+
+menu_links = [
+  { url = "$BASE_URL/", name = "Home", icon = "home.svg" },
+  { url = "$BASE_URL/posts/", name = "Posts", icon = "chat.svg" },
+]
