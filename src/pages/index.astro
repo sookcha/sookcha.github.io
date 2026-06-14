@@ -1,0 +1,8 @@
+---
+import HomePage from '@theme/layouts/Index.astro';
+import { getAllEntries } from '../lib/content';
+
+const entries = await getAllEntries();
+---
+
+<HomePage entries={entries} />

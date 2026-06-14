@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry, Page } from 'astro:content';
+import { entrySlug } from '../../../lib/content';
+import { resolveLang, t, type Lang } from '../../../i18n';
+import Base from '@theme/layouts/Base.astro';
+
+type GridEntry = CollectionEntry<'books'> | CollectionEntry<'music'> | CollectionEntry<'products'>;
+
+interface Props {
+  title: string;
+  entries: GridEntry[];
+  lang?: Lang;
+  categories?: string[];
+  activeCategory?: string;
+  basePath?: string;
+  page?: Page<GridEntry>;
+}
+
+const { title, entries, categories, activeCategory, basePath, page } = Astro.props;
+const lang = resolveLang(Astro.props.lang);
+const ui = t(lang);
+
+function getSubtitle(entry: GridEntry): string {
+  if (entry.collection === 'books') return entry.data.author;
+  if (entry.collection === 'music') return `${entry.data.artist} · ${entry.data.releaseYear}`;
+  return '';
+}
+---
+
+<Base title={title} lang={lang}>
+  <h1>{title}</h1>
+  {categories && categories.length > 0 && basePath && (
+    <nav class="category-nav">
+      <a href={basePath} class={!activeCategory ? 'active' : ''}>{ui.all}</a>
+      {categories.map((cat) => (
+        <a href={`${basePath}/${cat}`} class={activeCategory === cat ? 'active' : ''}>{cat}</a>
+      ))}
+    </nav>
+  )}
+  <ul class="collection-grid">
+    {entries.map((entry) => (
+      <li>
+        <a href={`/${entrySlug(entry)}`}>
+          {(entry.data as any).cover || (entry.data as any).image ? (
+            <img src={(entry.data as any).cover ?? (entry.data as any).image} alt={entry.data.title} loading="lazy" />
+          ) : (
+            <div class="cover-placeholder"></div>
+          )}
+          <div class="card-info">
+            <div class="card-title">{entry.data.title}</div>
+            {getSubtitle(entry) && <div class="card-sub">{getSubtitle(entry)}</div>}
+            <div class="card-rating">{entry.data.rating}/10</div>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+  {page && page.lastPage > 1 && (
+    <nav class="pagination">
+      {page.url.prev ? <a href={page.url.prev}>{ui.pagination.prev}</a> : <span class="pagination-disabled">{ui.pagination.prev}</span>}
+      <span>{page.currentPage} / {page.lastPage}</span>
+      {page.url.next ? <a href={page.url.next}>{ui.pagination.next}</a> : <span class="pagination-disabled">{ui.pagination.next}</span>}
+    </nav>
+  )}
+</Base>

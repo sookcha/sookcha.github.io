@@ -1,0 +1,37 @@
+---
+import { entrySlug, type AnyEntry } from '../../../lib/content';
+import { resolveLang, t, formatDate, type Lang } from '../../../i18n';
+import Base from '@theme/layouts/Base.astro';
+import type { CollectionEntry } from 'astro:content';
+import { siteConfig } from '../../../site.config';
+
+interface Props {
+  entries: AnyEntry[];
+  lang?: Lang;
+}
+
+const { entries } = Astro.props;
+const lang = resolveLang(Astro.props.lang);
+const ui = t(lang);
+
+const allPosts = entries.filter((e) => e.collection === 'posts') as CollectionEntry<'posts'>[];
+const posts = allPosts.slice(0, siteConfig.pageSize);
+const hasMore = allPosts.length > siteConfig.pageSize;
+---
+
+<Base title={siteConfig.title} lang={lang}>
+  {posts.length > 0 && (
+    <section>
+      <h2>{ui.sections.posts}</h2>
+      <ul class="post-list">
+        {posts.map((entry) => (
+          <li>
+            <span class="post-date">{formatDate(entry.data.date, lang)}</span>
+            <a class="post-title" href={`/${entrySlug(entry)}`}>{entry.data.title}</a>
+          </li>
+        ))}
+      </ul>
+      {hasMore && <p><a href="/posts">{ui.pagination.allPosts(allPosts.length)}</a></p>}
+    </section>
+  )}
+</Base>

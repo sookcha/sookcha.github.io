@@ -1,0 +1,21 @@
+---
+import { render } from 'astro:content';
+import { getAllEntries, entrySlug } from '../lib/content';
+import { components } from '@theme/registry';
+
+export async function getStaticPaths() {
+  const entries = await getAllEntries();
+  return entries.map((entry) => ({
+    params: { slug: entrySlug(entry) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const Component = components[entry.collection];
+const { Content } = await render(entry);
+---
+
+<Component entry={entry as never} lang={entry.data.lang}>
+  <Content />
+</Component>

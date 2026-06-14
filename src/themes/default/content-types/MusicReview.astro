@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, resolveLang, type Lang } from '../../../i18n';
+import { siteConfig } from '../../../site.config';
+import Base from '@theme/layouts/Base.astro';
+
+interface Props {
+  entry: CollectionEntry<'music'>;
+  lang?: Lang;
+}
+
+const { entry } = Astro.props;
+const lang = resolveLang(Astro.props.lang ?? entry.data.lang ?? siteConfig.lang);
+const { title, artist, date, rating, releaseYear, cover, spotifyUrl, hideContent } = entry.data;
+
+function spotifyEmbedUrl(url: string): string {
+  return url.replace('open.spotify.com/album/', 'open.spotify.com/embed/album/');
+}
+---
+
+<Base title={title} lang={lang}>
+  <article>
+    {cover && <img src={cover} alt={title} class="review-cover" />}
+    <h1>{title}</h1>
+    <div class="meta">
+      <span>{artist}</span>
+      <span>{releaseYear}</span>
+      <span class="rating">{rating}/10</span>
+      <span>{formatDate(date, lang)}</span>
+    </div>
+    {spotifyUrl && (
+      <iframe
+        src={spotifyEmbedUrl(spotifyUrl)}
+        height="152"
+        loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      />
+    )}
+    <hr />
+    {!hideContent && <slot />}
+  </article>
+</Base>

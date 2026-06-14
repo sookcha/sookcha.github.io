@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionGrid from '@theme/layouts/CollectionGrid.astro';
+import { siteConfig } from '../../site.config';
+import { t } from '../../i18n';
+
+const ui = t(siteConfig.lang);
+
+export async function getStaticPaths() {
+  const all = await getCollection('products', (e) => !e.data.draft && !e.data.hidden);
+  const categories = [...new Set(all.map((e) => e.data.category).filter(Boolean) as string[])];
+  return categories.map((category) => ({
+    params: { category },
+    props: {
+      entries: all.filter((e) => e.data.category === category).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+      categories: categories.sort(),
+    },
+  }));
+}
+
+const { category } = Astro.params;
+const { entries, categories } = Astro.props;
+---
+
+<CollectionGrid
+  title={`${ui.sections.products} · ${category}`}
+  entries={entries}
+  categories={categories}
+  activeCategory={category}
+  basePath="/products"
+/>

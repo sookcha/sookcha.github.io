@@ -1,0 +1,40 @@
+---
+import { entrySlug, type AnyEntry } from '../../../lib/content';
+import { formatDate, resolveLang, t, type Lang } from '../../../i18n';
+import Base from '@theme/layouts/Base.astro';
+import type { Page } from 'astro';
+
+interface Props {
+  title: string;
+  entries: AnyEntry[];
+  lang?: Lang;
+  page?: Page<AnyEntry>;
+}
+
+const { title, entries, page } = Astro.props;
+const lang = resolveLang(Astro.props.lang);
+const ui = t(lang);
+
+function getHref(entry: AnyEntry): string {
+  return `/${entrySlug(entry)}`;
+}
+---
+
+<Base title={title} lang={lang}>
+  <h1>{title}</h1>
+  <ul class="post-list">
+    {entries.map((entry) => (
+      <li>
+        <span class="post-date">{formatDate(entry.data.date, lang)}</span>
+        <a class="post-title" href={getHref(entry)}>{entry.data.title}</a>
+      </li>
+    ))}
+  </ul>
+  {page && page.lastPage > 1 && (
+    <nav class="pagination">
+      {page.url.prev ? <a href={page.url.prev}>{ui.pagination.prev}</a> : <span class="pagination-disabled">{ui.pagination.prev}</span>}
+      <span>{page.currentPage} / {page.lastPage}</span>
+      {page.url.next ? <a href={page.url.next}>{ui.pagination.next}</a> : <span class="pagination-disabled">{ui.pagination.next}</span>}
+    </nav>
+  )}
+</Base>

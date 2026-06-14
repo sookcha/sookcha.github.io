@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionGrid from '@theme/layouts/CollectionGrid.astro';
+import { siteConfig, } from '../../site.config';
+import { t } from '../../i18n';
+
+const ui = t(siteConfig.lang);
+
+export const getStaticPaths = async ({ paginate }: { paginate: Function }) => {
+  const entries = await getCollection('books', (e: any) => !e.data.draft && !e.data.hidden);
+  entries.sort((a: any, b: any) => b.data.date.valueOf() - a.data.date.valueOf());
+  const categories = [...new Set(entries.map((e: any) => e.data.category).filter(Boolean) as string[])].sort();
+  return paginate(entries, { pageSize: siteConfig.pageSize, props: { categories } });
+};
+
+const { page, categories } = Astro.props;
+---
+
+<CollectionGrid title={ui.sections.books} entries={page.data} categories={categories} basePath="/books" page={page} />

@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, resolveLang, type Lang } from '../../../i18n';
+import { siteConfig } from '../../../site.config';
+import Base from '@theme/layouts/Base.astro';
+
+interface Props {
+  entry: CollectionEntry<'posts'>;
+  lang?: Lang;
+}
+
+const { entry } = Astro.props;
+const lang = resolveLang(Astro.props.lang ?? entry.data.lang ?? siteConfig.lang);
+const { title, date, description, hideContent } = entry.data;
+---
+
+<Base title={title} lang={lang}>
+  <article>
+    <h1>{title}</h1>
+    <div class="meta">
+      <span>{formatDate(date, lang)}</span>
+      {description && <p>{description}</p>}
+    </div>
+    {!hideContent && <slot />}
+  </article>
+</Base>

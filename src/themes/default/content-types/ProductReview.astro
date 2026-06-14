@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { t, formatDate, resolveLang, type Lang } from '../../../i18n';
+import { siteConfig } from '../../../site.config';
+import Base from '@theme/layouts/Base.astro';
+
+interface Props {
+  entry: CollectionEntry<'products'>;
+  lang?: Lang;
+}
+
+const { entry } = Astro.props;
+const lang = resolveLang(Astro.props.lang ?? entry.data.lang ?? siteConfig.lang);
+const { title, date, rating, image, shopUrl, hideContent } = entry.data;
+const ui = t(lang);
+---
+
+<Base title={title} lang={lang}>
+  <article>
+    {image && <img src={image} alt={title} class="review-cover" />}
+    <h1>{title}</h1>
+    <div class="meta">
+      <span class="rating">{rating}/10</span>
+      <span>{formatDate(date, lang)}</span>
+    </div>
+    {shopUrl && (
+      <div class="shop-link">
+        <a href={shopUrl} target="_blank" rel="noopener noreferrer">{ui.product.shopLink}</a>
+        <p class="affiliate-notice">{ui.product.affiliateNotice}</p>
+      </div>
+    )}
+    <hr />
+    {!hideContent && <slot />}
+  </article>
+</Base>

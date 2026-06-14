@@ -1,0 +1,64 @@
+---
+import '@theme/theme.css';
+import { resolveLang, t, type Lang } from '../../../i18n';
+import { siteConfig } from '../../../site.config';
+
+interface Props {
+  title: string;
+  lang?: Lang;
+}
+
+const { title } = Astro.props;
+const lang = resolveLang(Astro.props.lang);
+const ui = t(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/">{siteConfig.title}</a>
+      <a href="/posts">{ui.nav.posts}</a>
+      <a href="/books">{ui.nav.books}</a>
+      <a href="/music">{ui.nav.music}</a>
+      <a href="/products">{ui.nav.products}</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode">○</button>
+    </nav>
+
+    <script>
+      const btn = document.getElementById('theme-toggle')!;
+      const root = document.documentElement;
+
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = saved ? saved === 'dark' : prefersDark;
+
+      if (isDark) root.setAttribute('data-theme', 'dark');
+      btn.textContent = isDark ? '☀️' : '🌙';
+
+      btn.addEventListener('click', () => {
+        const dark = root.getAttribute('data-theme') === 'dark';
+        root.setAttribute('data-theme', dark ? 'light' : 'dark');
+        localStorage.setItem('theme', dark ? 'light' : 'dark');
+        btn.textContent = dark ? '🌙' : '☀️';
+      });
+    </script>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <hr />
+      <p id="day-greeting"></p>
+    </footer>
+    <script>
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const day = days[new Date().getDay()];
+      document.getElementById('day-greeting')!.textContent = `Happy ${day}!`;
+    </script>
+  </body>
+</html>

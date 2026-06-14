@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { t, formatDate, resolveLang, type Lang } from '../../../i18n';
+import { siteConfig } from '../../../site.config';
+import Base from '@theme/layouts/Base.astro';
+
+interface Props {
+  entry: CollectionEntry<'books'>;
+  lang?: Lang;
+}
+
+const { entry } = Astro.props;
+const lang = resolveLang(Astro.props.lang ?? entry.data.lang ?? siteConfig.lang);
+const { title, author, date, rating, isbn, cover, grip, resonance, hideContent } = entry.data;
+const ui = t(lang);
+---
+
+<Base title={title} lang={lang}>
+  <article>
+    {cover && <img src={cover} alt={title} class="review-cover" />}
+    <h1>{title}</h1>
+    <div class="meta">
+      <span>{author}</span>
+      <span class="rating">{rating}/10</span>
+      <span>{formatDate(date, lang)}</span>
+    </div>
+    <dl class="book-meta">
+      <dt>ISBN</dt>
+      <dd>{isbn}</dd>
+      {grip && (
+        <>
+          <dt>{ui.bookMeta.grip}</dt>
+          <dd>{grip}/5</dd>
+        </>
+      )}
+      {resonance && (
+        <>
+          <dt>{ui.bookMeta.resonance}</dt>
+          <dd>{resonance}/5</dd>
+        </>
+      )}
+    </dl>
+    <hr />
+    {!hideContent && <slot />}
+  </article>
+</Base>

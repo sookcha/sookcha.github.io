@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionGrid from '@theme/layouts/CollectionGrid.astro';
+import { siteConfig } from '../../site.config';
+import { t } from '../../i18n';
+
+const ui = t(siteConfig.lang);
+
+const entries = await getCollection('products', (e) => !e.data.draft && !e.data.hidden);
+entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = [...new Set(entries.map((e) => e.data.category).filter(Boolean) as string[])].sort();
+---
+
+<CollectionGrid title={ui.sections.products} entries={entries} categories={categories} basePath="/products" />

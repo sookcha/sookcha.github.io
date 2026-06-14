@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import { t } from '../../i18n';
+import { siteConfig } from '../../site.config';
+
+import PostList from '@theme/layouts/PostList.astro';
+
+export const getStaticPaths = async ({ paginate }: { paginate: Function }) => {
+  const entries = await getCollection('posts', (e: any) => !e.data.draft && !e.data.hidden);
+  entries.sort((a: any, b: any) => b.data.date.valueOf() - a.data.date.valueOf());
+  return paginate(entries, { pageSize: siteConfig.pageSize });
+};
+
+const ui = t(siteConfig.lang);
+const { page } = Astro.props;
+---
+
+<PostList title={ui.sections.posts} entries={page.data} lang={siteConfig.lang} page={page} />
