@@ -4,6 +4,4 @@ date: 2026-04-01
 description: "First post on the blog."
 ---
 
-This is a plain article. No rating, no structured fields — just writing.
-
-It can be anything: a thought, an essay, a note to self.
+읽고 보고 쓴 것에 대한 감상을 남기고자 합니다.
